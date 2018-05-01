@@ -1,0 +1,14 @@
+game:
+  othello:
+    board:
+      height: 8
+      length: 8
+    output:
+      show-left-coordinate: true
+      show-right-coordinate: false
+      show-top-coordinate: false
+      show-bottom-coordinate: true
+      pieceDecorator:
+        BLACK: "X"
+        WHITE: "O"
+        EMPTY: "-"
