@@ -115,7 +115,7 @@ Player 'X' wins ( 55 vs 9 )
 
 # Project
 
-This project attends to implement such a game. Although the board has a standard dimension 8x8, project allows to configure board length and height in the property file. The initial 4 disks will be placed in the middle of the board. However due to display limitation, it will assume that columns will not be larger than 26 (a-z).
+This project trys implement such a game. Although the board has a standard dimension 8x8, project allows to configure board length and height in the property file. The initial 4 disks will be placed in the middle of the board. However due to display limitation, it will assume that columns will not be larger than 26 (a-z).
 
 Player can also choose his color in the configuration, as well as the preference to display or not the coordinates of game board. 
 
