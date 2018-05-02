@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import game.othello.configuration.Preference;
 import game.othello.model.Board;
-import game.othello.model.Piece;
+import game.othello.model.Disk;
 
 public class CommandLineGameOutput implements GameOutput {
 
@@ -35,10 +35,10 @@ public class CommandLineGameOutput implements GameOutput {
 			}
 
 			for (int c = 0; c < board.getLength(); c++) {
-				Piece piece = board.get(r, c);
+				Disk piece = board.get(r, c);
 				String decorated;
-				if (pref.getPieceDecorator().containsKey(piece)) {
-					decorated = pref.getPieceDecorator().get(piece);
+				if (pref.getDiskDecorator().containsKey(piece)) {
+					decorated = pref.getDiskDecorator().get(piece);
 				} else {
 					decorated = piece.toString();
 				}

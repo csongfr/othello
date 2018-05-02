@@ -5,17 +5,17 @@ import java.util.Map;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import game.othello.model.Piece;
+import game.othello.model.Disk;
 
 @ConfigurationProperties("game.othello.output")
 public class Preference {
-	
+
 	private boolean showLeftCoordinate;
 	private boolean showRightCoordinate;
 	private boolean showTopCoordinate;
 	private boolean showBottomCoordinate;
-	private Map<Piece, String> pieceDecorator = new HashMap<>();
-	
+	private Map<Disk, String> diskDecorator = new HashMap<>();
+
 	public boolean isShowLeftCoordinate() {
 		return showLeftCoordinate;
 	}
@@ -48,21 +48,21 @@ public class Preference {
 		this.showBottomCoordinate = showBottomCoordinate;
 	}
 
-	public Map<Piece, String> getPieceDecorator() {
-		return pieceDecorator;
+	public Map<Disk, String> getDiskDecorator() {
+		return diskDecorator;
 	}
 
-	public void setPieceDecorator(Map<Piece, String> pieceDecorator) {
-		this.pieceDecorator = pieceDecorator;
+	public void setDiskDecorator(Map<Disk, String> diskDecorator) {
+		this.diskDecorator = diskDecorator;
 	}
-	
+
 	public void showAllCoordinate() {
 		this.showLeftCoordinate = true;
 		this.showRightCoordinate = true;
 		this.showTopCoordinate = true;
 		this.showBottomCoordinate = true;
 	}
-	
+
 	public void hideAllCoordinate() {
 		this.showLeftCoordinate = false;
 		this.showRightCoordinate = false;

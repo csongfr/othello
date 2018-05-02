@@ -11,30 +11,30 @@ import org.junit.Test;
 
 import game.othello.configuration.Preference;
 import game.othello.model.Board;
-import game.othello.model.Piece;
+import game.othello.model.Disk;
 
 public class CommandLineGameOutputTest {
 
 	private Board board;
 	private Preference pref;
 	private CommandLineGameOutput cli;
-	private Map<Piece, String> pieceDecorator;
+	private Map<Disk, String> diskDecorator;
 
 	@Before
 	public void setup() {
 		board = new Board(8, 8);
-		board.place(Piece.WHITE, 3, 3);
-		board.place(Piece.BLACK, 3, 4);
-		board.place(Piece.BLACK, 4, 3);
-		board.place(Piece.WHITE, 4, 4);
+		board.init(Disk.LIGHT, 3, 3);
+		board.init(Disk.DARK, 3, 4);
+		board.init(Disk.DARK, 4, 3);
+		board.init(Disk.LIGHT, 4, 4);
 
-		pieceDecorator = new HashMap<>();
-		pieceDecorator.put(Piece.BLACK, "X");
-		pieceDecorator.put(Piece.WHITE, "O");
-		pieceDecorator.put(Piece.EMPTY, "-");
+		diskDecorator = new HashMap<>();
+		diskDecorator.put(Disk.DARK, "X");
+		diskDecorator.put(Disk.LIGHT, "O");
+		diskDecorator.put(Disk.EMPTY, "-");
 
 		pref = new Preference();
-		pref.setPieceDecorator(pieceDecorator);
+		pref.setDiskDecorator(diskDecorator);
 		cli = new CommandLineGameOutput();
 	}
 
@@ -52,11 +52,11 @@ public class CommandLineGameOutputTest {
 				"--------\n";
 		assertThat(result, is(expected));
 		
-		Map<Piece, String> anotherPieceDecorator = new HashMap<>();
-		anotherPieceDecorator.put(Piece.BLACK, "B");
-		anotherPieceDecorator.put(Piece.WHITE, "W");
-		anotherPieceDecorator.put(Piece.EMPTY, ".");
-		pref.setPieceDecorator(anotherPieceDecorator);
+		Map<Disk, String> anotherDiskDecorator = new HashMap<>();
+		anotherDiskDecorator.put(Disk.DARK, "B");
+		anotherDiskDecorator.put(Disk.LIGHT, "W");
+		anotherDiskDecorator.put(Disk.EMPTY, ".");
+		pref.setDiskDecorator(anotherDiskDecorator);
 		result = cli.boardToString(board, pref);
 		expected = 
 				"........\n" + 
@@ -68,7 +68,7 @@ public class CommandLineGameOutputTest {
 				"........\n" + 
 				"........\n";
 		assertThat(result, is(expected));
-		pref.setPieceDecorator(pieceDecorator);
+		pref.setDiskDecorator(diskDecorator);
 
 		pref.hideAllCoordinate();
 		pref.setShowLeftCoordinate(true);

@@ -115,10 +115,11 @@ Player 'X' wins ( 55 vs 9 )
 
 # Project
 
-This project trys implement such a game. Although the board has a standard dimension 8x8, project allows to configure board length and height in the property file. The initial 4 disks will be placed in the middle of the board. However due to display limitation, it will assume that columns will not be larger than 26 (a-z).
+This project tries to implement such a game. Although the board has a standard dimension 8x8, project allows to configure board length and height in the property file. However due to display limitation, it will assume that columns will not be larger than 26 (a-z). Game starting position is also configurable in the same file.
 
-Player can also choose his color in the configuration, as well as the preference to display or not the coordinates of game board. 
+Player chooses his color in the configuration, as well as the preference to display or not the coordinates of game board. 
 
-Technically, Spring Boot is chosen to ensure a good maintainability. Game input and output are made abstract to support further improvement, currently only contains command line implementation, but will be able to extend easily. Unit tests are performed with original JUnit packages, and an integration test is done with Spring Boot Test utilities.
+Technically, Spring Boot is chosen to ensure a good maintainability. Game input and output are made abstract to support further improvements. A default command line implementation is provided in this project, User can extend _GameInput_ and _GameOutput_ interface to have his own implementations. 
 
-The algorithm is quite basic in the first version, might have way to get a better time complexity, but will probably downgrade the code readability.
+Important methods are tested with JUnit packages, an integration test is done with the help of Spring Boot Test utilities.
+

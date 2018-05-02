@@ -3,12 +3,19 @@ game:
     board:
       height: 8
       length: 8
+      starting-position:
+        4:
+          d: LIGHT
+          e: DARK
+        5:
+          d: DARK
+          e: LIGHT
     output:
       show-left-coordinate: true
       show-right-coordinate: false
       show-top-coordinate: false
       show-bottom-coordinate: true
-      pieceDecorator:
-        BLACK: "X"
-        WHITE: "O"
-        EMPTY: "-"
+      diskDecorator:
+        DARK: X
+        LIGHT: O
+        EMPTY: '-'

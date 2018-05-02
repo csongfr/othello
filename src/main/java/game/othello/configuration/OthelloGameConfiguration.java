@@ -28,7 +28,7 @@ public class OthelloGameConfiguration {
 
 	@Bean
 	public Board Board(BoardConfiguration configuration) {
-		return new Board(configuration.getHeight(), configuration.getLength());
+		return new Board(configuration);
 	}
 
 	@Bean

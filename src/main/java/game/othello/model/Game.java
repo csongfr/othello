@@ -1,6 +1,8 @@
 package game.othello.model;
 
+import java.awt.Point;
 import java.io.IOException;
+import java.util.Set;
 
 import game.othello.configuration.Preference;
 import game.othello.ui.GameInput;
@@ -21,34 +23,34 @@ public class Game {
 	}
 
 	public void start() throws IOException {
-		init(board);
 		output.print(board, preference);
 		output.println();
 
-		Piece current = Piece.BLACK;
+		Disk current = Disk.DARK;
 		int skips = 0;
 		while (!board.isFull() && skips < 2) {
-			String decoratedPlayer = preference.getPieceDecorator().containsKey(current)
-					? preference.getPieceDecorator().get(current)
+			String decoratedPlayer = preference.getDiskDecorator().containsKey(current)
+					? preference.getDiskDecorator().get(current)
 					: current.toString();
-			if (board.canPlay(current)) {
-				skips = 0;
-				output.print("Player '" + decoratedPlayer + "' move: ");
-				String inputString = input.next();
-				Command cmd = Command.parse(inputString);
-				if (cmd == null) {
-					output.println("Invalid move. Please try again.");
-				} else if (board.canPlace(current, cmd.getRowIndex(), cmd.getColIndex())) {
-					board.place(current, cmd.getRowIndex(), cmd.getColIndex());
-					output.print(board, preference);
-					output.println();
-					current = switchPlayer(current);
-				} else {
-					output.println("Invalid move. Please try again.");
-				}
-			} else {
+					
+			Set<Point> moves = board.getLegalMoves(current);
+			if (moves.isEmpty()) {
 				skips++;
 				output.println("No availabel move for Player '" + decoratedPlayer + "'");
+				current = switchPlayer(current);
+			} else {
+				skips = 0;
+				output.print("Player '" + decoratedPlayer + "' move: ");
+				Command cmd = Command.parse(input.next());
+				while (cmd == null || !moves.contains(cmd.getPoint())) {
+					output.println("Invalid move. Please try again.");
+					output.print("Player '" + decoratedPlayer + "' move: ");
+					cmd = Command.parse(input.next());
+				}
+				// ensure valid move
+				board.place(current, cmd.getPoint());
+				output.print(board, preference);
+				output.println();
 				current = switchPlayer(current);
 			}
 		}
@@ -59,19 +61,8 @@ public class Game {
 		output.close();
 	}
 
-	private Piece switchPlayer(Piece current) {
-		return current == Piece.BLACK ? Piece.WHITE : Piece.BLACK;
-	}
-
-	private void init(Board board) {
-		// left upper index
-		int h = board.getHeight() / 2 - 1;
-		int l = board.getLength() / 2 - 1;
-
-		board.init(Piece.WHITE, h, l);
-		board.init(Piece.BLACK, h, l + 1);
-		board.init(Piece.BLACK, h + 1, l);
-		board.init(Piece.WHITE, h + 1, l + 1);
+	private Disk switchPlayer(Disk current) {
+		return current == Disk.DARK ? Disk.LIGHT : Disk.DARK;
 	}
 
 }

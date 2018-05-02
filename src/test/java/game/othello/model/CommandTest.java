@@ -11,12 +11,12 @@ public class CommandTest {
 	@Test
 	public void testParseCommand() throws Exception {
 		Command parsed = Command.parse("3d");
-		assertThat(parsed.getRowIndex(), is(2));
-		assertThat(parsed.getColIndex(), is(3));
+		assertThat(parsed.getPoint().x, is(2));
+		assertThat(parsed.getPoint().y, is(3));
 
 		parsed = Command.parse("d3");
-		assertThat(parsed.getRowIndex(), is(2));
-		assertThat(parsed.getColIndex(), is(3));
+		assertThat(parsed.getPoint().x, is(2));
+		assertThat(parsed.getPoint().y, is(3));
 
 		parsed = Command.parse("3");
 		assertThat(parsed, is(nullValue()));
